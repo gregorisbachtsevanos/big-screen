@@ -1,23 +1,23 @@
 <%- layout('layout/template.ejs') %>
 
-
-<div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 m-auto"></div>
+<div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto"></div>
 <script>
-    fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=46017593ecb210526b182311c582626b', {
-            method: 'POST',
-            headers: {
-
-            }
-        })
-        .then(res => res.json())
-        .then((data) => {
-            console.log(data)
-            let output = ''
-            for (movie of data.results) {
-                output +=
-                    /*html*/
-                    `<div class="col w-25">
-                        <div class="card bg-dark text-white text-opacity-75 h-100 w-100">
+    
+    // let category = 'top_rated'
+    const loadMovies = (category = 'top_rated') => {
+        fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=46017593ecb210526b182311c582626b`, {
+                method: 'POST',
+                headers: {}
+            })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                let output = ''
+                for (movie of data.results) {
+                    output +=
+                        /*html*/
+                        `<div class="col w-25">
+                        <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
                             <div style="height:25rem">
                                 <img src="https://image.tmdb.org/t/p/original/${movie.poster_path}" class="card-img-top h-100" alt="...">
                             </div>
@@ -35,8 +35,13 @@
                         
                         </div>
                     </div>`
-            }
-            document.querySelector('.render-movies').innerHTML = output
-        })
-        .catch(err => console.log(err))
+                }
+                document.querySelector('.render-movies').innerHTML = output
+            })
+            .catch(err => console.log(err))
+    }
+    loadMovies()
+    document.querySelector("#categories").addEventListener('change', (e) => {
+        loadMovies(e.target.value)
+    })
 </script>

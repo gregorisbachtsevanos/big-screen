@@ -11,26 +11,23 @@
 					<a class="nav-link active" aria-current="page" href="/bigscreen/homepage">Home</a>
 				</li>
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false">
-						Categories
-					</a>
-					<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-						<form action="">
-							<button class="dropdown-item text-white text-opacity-75">Now Playing</button>
-						</form>
-						<form action="">
-							<button class="dropdown-item text-white text-opacity-75">Top Rated</button>
-						</form>
-					</div>
+				<select class="nav-item dropdown bg-dark text-white text-opacity-50 border-0" id="categories"
+					aria-labelledby="navbarDropdownMenuLink">
+
+					<option value="now_playing" class="dropdown-item text-white text-opacity-75" disabled selected>
+						Categories</option>
+					<option id="now_playing" value="now_playing" class="dropdown-item text-white text-opacity-75">Now
+						Playing</option>
+					<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75">Top Rated
+					</option>
+				</select>
 				<li class="nav-item">
 					<a class="nav-link" href="/bigscreen/login">Login</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/bigscreen/register">Create an Account</a>
 				</li>
-				</li>
+				</select>
 			</ul>
 		</div>
 	</div>
