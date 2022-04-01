@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const app = express()
 
+const usersRouter = require('./routers/users')
+const moviesRouter = require('./routers/movies/movies')
+
 const PORT = process.env.PORT || 3000;
 const URI = 'mongodb+srv://GregosisB:6re6b123@cluster0.mdmjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
@@ -24,8 +27,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-app.get('/homepage', (req, res) => {
-    res.render("homepage", {topRated, playingNow})
-})
+app.use('/bigscreen', usersRouter)
+app.use("/bigscreen", moviesRouter)
 
 app.listen(PORT, () => console.log("Server is starting at " + PORT))

@@ -13,9 +13,9 @@ mongoose.connect(URI || 'mongodb://localhost:27017/big-screen', {
 
 const movieSchema = new Schema({
     title: String,
-    Image: String,
-    Description: String,
-    Release_Info: String
+    image: String,
+    description: String,
+    release_info: String
 })
 
 const Movies = mongoose.model("Movies", movieSchema)
@@ -23,18 +23,20 @@ const Movies = mongoose.model("Movies", movieSchema)
 const makeMovie = async () => {
     const movie = new Movies({
         title: "Movie title",
-        Image: "Movie Image",
-        Description: "Movie Description",
-        Release_Info: "Movie release info"
+        image: "Movie Image",
+        description: "Movie Description",
+        release_info: "Movie release info"
     })
    await movie.save()
 }
 
-makeMovie()
-    .then((result) => {
-        console.log('result')   
-    }).catch((err) => {
-        console.log(err)   
-    });
+// makeMovie()
+//     .then((result) => {
+//         console.log('result')   
+//     }).catch((err) => {
+//         console.log(err)   
+//     });
 
 // module.exports = Movies
+
+module.exports = Movies

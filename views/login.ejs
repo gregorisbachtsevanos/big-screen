@@ -1,0 +1,36 @@
+<%- layout('layout/template.ejs') %>
+<div class="container border rounded p-5 my-5 w-25">
+	<form method="POST" action="/bigscreen/homepage" class="row g-3 needs-validation" novalidate>
+		<div class="col-md-12">
+			<label for="validationCustomUsername" class="form-label">Username</label>
+			<div class="input-group has-validation">
+				<input type="text" class="form-control" name="user[username]" id="validationCustomUsername"
+					aria-describedby="inputGroupPrepend" required>
+					<div class="valid-feedback">
+						Looks good!
+					</div>
+				<div class="invalid-feedback">
+					Please choose a username.
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+			<label for="validationCustom05" class="form-label">Password</label>
+			<input type="password" class="form-control" id="validationCustom05" minlength=8 name="user[password]" required>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
+			<div class="invalid-feedback">
+				Please provide your password.
+			</div>
+		</div>
+		<div class="col-12">
+			<button class="btn btn btn-success" type="submit">Login</button>
+		</div>
+		<div class="col-12">
+			<a href="/bigscreen/register" type="submit">Don't have an account? Create one</a>
+		</div>
+	</form>
+	
+</div>

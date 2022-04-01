@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const validator = require('validator')
+const validator = require('validator');
+const Movies = require('./movies_model');
 const {
     Schema
 } = mongoose;
 
 const userSchema = new Schema({
-    fullaname: {
+    fullname: {
         type: String,
         required: true
     },
@@ -33,7 +34,18 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: 6
-    }
+    },
+    type:{
+        type: String,
+        required: true, 
+        emit: ['typeA', 'typeB']
+    },
+    movies:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Movies"
+        }
+    ]
 })
 
 const Users = mongoose.model("Users", userSchema)
