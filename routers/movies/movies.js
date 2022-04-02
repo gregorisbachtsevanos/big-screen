@@ -4,11 +4,13 @@ const {
 	date
 } = require('joi')
 const mongoose = require('mongoose')
-const Movies = require('../../model/movies_model')
+const Movies = require('../../model/movies_model');
+const User = require('../../model/user_model');
+const { isLoggedIn } = require('../../utils/middleware');
 
 const router = express.Router()
 
-router.post("/homepage/movies", async (req, res) => {
+router.post("/homepage/moviesLike", isLoggedIn,  async (req, res) => {
 	const {
 		movieId
 	} = req.body
@@ -17,13 +19,21 @@ router.post("/homepage/movies", async (req, res) => {
 		.then(async (data) => {
 			for(movie of data)
 				if(movie.id == movieId){
-					const { title, release_date, overview, backdrop_path } = movie
-					await new Movies({title, release_info:release_date, description:overview, image: backdrop_path}).save()
+					const { title, release_date, overview, poster_path } = movie
+					const addMovie = await new Movies({title, release_info:release_date, description:overview, image: poster_path})
+					addMovie.user = req.user._id
+					console.log(addMovie)
+					await addMovie.save()
 				}
 		})
 		.catch(error => console.error(error))
 
-	res.redirect('/bigscreen/homepage')
+	res.redirect('/')
+})
+
+router.post("/homepage/moviesComment", isLoggedIn,  async (req, res) => {
+	const movie = await Movies.findById(req.body.movieId)
+	console.log(movie)
 })
 
 module.exports = router

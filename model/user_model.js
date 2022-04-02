@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const passportLocalMongoose = require('passport-local-mongoose');
 const Movies = require('./movies_model');
 const {
     Schema
@@ -9,15 +10,6 @@ const userSchema = new Schema({
     fullname: {
         type: String,
         required: true
-    },
-    username: {
-        type: String,
-        required: true,
-        minLength: 4,
-        unique: true,
-        lowercase: true,
-        trim: true,
-
     },
     email: {
         type: String,
@@ -29,11 +21,6 @@ const userSchema = new Schema({
                 throw new Error("Invalid Email")
             }
         }
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 6
     },
     type:{
         type: String,
@@ -47,6 +34,8 @@ const userSchema = new Schema({
         }
     ]
 })
+
+userSchema.plugin(passportLocalMongoose)
 
 const Users = mongoose.model("Users", userSchema)
 

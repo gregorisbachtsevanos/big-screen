@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require("./user_model")
 const {
     Schema
 } = mongoose;
@@ -15,7 +16,11 @@ const movieSchema = new Schema({
     title: String,
     image: String,
     description: String,
-    release_info: String
+    release_info: String,
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: User
+    }
 })
 
 const Movies = mongoose.model("Movies", movieSchema)
@@ -25,7 +30,8 @@ const makeMovie = async () => {
         title: "Movie title",
         image: "Movie Image",
         description: "Movie Description",
-        release_info: "Movie release info"
+        release_info: "Movie release info",
+        
     })
    await movie.save()
 }

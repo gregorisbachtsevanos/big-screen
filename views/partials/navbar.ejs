@@ -1,34 +1,43 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark container">
+<nav class="navbar navbar-expand navbar-dark bg-dark ">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">LOGO</a>
+		<a class="navbar-brand" href="/">LOGO</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse row" id="navbarNavDropdown">
-			<ul class="navbar-nav justify-content-end">
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/bigscreen/homepage">Home</a>
-				</li>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="/">Home</a>
+			</li>
 
-				<select class="nav-item dropdown bg-dark text-white text-opacity-50 border-0" id="categories"
-					aria-labelledby="navbarDropdownMenuLink">
-
-					<option value="now_playing" class="dropdown-item text-white text-opacity-75" disabled selected>
-						Categories</option>
-					<option id="now_playing" value="now_playing" class="dropdown-item text-white text-opacity-75">Now
-						Playing</option>
-					<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75">Top Rated
-					</option>
-				</select>
+			<select class="nav-item dropdown bg-dark text-white text-opacity-50 border-0" id="categories"
+				aria-labelledby="navbarDropdownMenuLink">
+				<option value="now_playing" class="dropdown-item text-white text-opacity-75" disabled selected>
+					Categories</option>
+				<option id="now_playing" value="now_playing" class="dropdown-item text-white text-opacity-75">Now
+					Playing</option>
+				<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75">Top Rated
+				</option>
+			</select>
+			<% if (!user) { %>
 				<li class="nav-item">
-					<a class="nav-link" href="/bigscreen/login">Login</a>
+					<a class="nav-link" href="/login">Login</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/bigscreen/register">Create an Account</a>
+					<a class="nav-link" href="/register">Create an Account</a>
 				</li>
-				</select>
-			</ul>
-		</div>
+			<% } else {%>
+				<li class="nav-item">
+					<a class="nav-link" href="/favourites">Favourites</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Logout</a>
+				</li>
+			<%  }%>
+			</select>
+		</ul>
 	</div>
 </nav>
+<div class="row me-1">
+	<p class="text-end text-opacity-75 text-white"><%= (user) ? user.fullname : void(0)%></p>
+</div>

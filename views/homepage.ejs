@@ -2,7 +2,6 @@
 
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto"></div>
 <script>
-    
     // let category = 'top_rated'
     const loadMovies = (category = 'top_rated') => {
         fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=46017593ecb210526b182311c582626b`, {
@@ -11,37 +10,49 @@
             })
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
-                let output = ''
-                for (movie of data.results) {
-                    output +=
-                        /*html*/
-                        `<div class="col w-25">
+                renderMovieCard(data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    const renderMovieCard = (data) => {
+        let output = ''
+
+        for (movie of data.results) {
+            output +=
+                /*html*/
+                `<div class="col w-25">
                         <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
-                            <div style="height:25rem">
+                            <div style="height:20rem">
                                 <img src="https://image.tmdb.org/t/p/original/${movie.poster_path}" class="card-img-top h-100" alt="...">
                             </div>
                         <div class="card-body">
                             <h5 class="card-title">${movie.title}</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="card-text">${movie.release_date}</p>
-                                <form action="/bigscreen/homepage/movies" method="POST">
+                                <form action="/homepage/moviesLike" method="POST">
                                     <input type="hidden" id="hiddenInput" name="movieId" value="${movie.id}" />
                                     <input type="submit"  class="text-decoration-none h2 bg-transparent border-0 link-danger" value="&#9825;">
                                 </form>
+                                
+                            </div>
+                                <!--<i class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like"><span>&#9825;<span></i>-->
+
                             </div>
                             <p class="card-text">${movie.overview}</p>
                         </div>
                         
                         </div>
                     </div>`
-                }
-                document.querySelector('.render-movies').innerHTML = output
-            })
-            .catch(err => console.log(err))
+        }
+        document.querySelector('.render-movies').innerHTML = output
     }
     loadMovies()
     document.querySelector("#categories").addEventListener('change', (e) => {
         loadMovies(e.target.value)
     })
+
+    // $("body").on("click", "#like", function () {
+    //     alert('like')
+    // });
 </script>
