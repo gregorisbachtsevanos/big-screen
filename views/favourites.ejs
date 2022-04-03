@@ -1,49 +1,52 @@
 <%- layout('layout/template.ejs') %>
 
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto">
-<% for (movie of movies) { %>
-    <div class="col w-25">
+    <% for (movie of movies) { %>
+    <div class="col" style="width: 33%;">
         <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
-            <div style="height:25rem">
+            <div style="height:20rem">
                 <img src="https://image.tmdb.org/t/p/original/<%=movie.image%>" class="card-img-top h-100" alt="...">
             </div>
             <div class="card-body">
                 <h5 class="card-title"><%=movie.title%></h5>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="card-text"><%=movie.release_info%></p>
-                    <form action="/homepage/movies" method="POST">
-                        <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
-                        <input type="submit" class="text-decoration-none h2 bg-transparent border-0 link-danger"
-                            value="&hearts;">
-                    </form>
-                    <button type="button" class="btn fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        &#128172;
-                    </button>
+                    <div class="d-flex">
+                        <form action="/homepage/moviesLike" method="POST">
+                            <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
+                            <input type="submit" class="text-decoration-none h2 bg-transparent border-0 link-danger"
+                                value="&hearts;">
+                        </form>
+                        <% if(user.type == 'typeA'){ %>
+                        <button class="bg-transparent border-0 h5" id="show-comment-form">&#128172;</button>
+                        <div id="comment-form" style="transition:.7s; top:60%"
+                        class="position-absolute end-0 opacity-0 container bg-dark p-2">
+                        <form action="/homepage/moviesComment" method="POST">
+                            <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
+                            <input class="form-control" type="text" name="comment" placeholder="comment" />
+                            <input type="submit" class="btn btn-sm my-2 btn-success text-decoration-none h5 border-0"
+                                value="Send">
+                        </form>
+                        <% for (comment of movie.comment) { %>
+                            <p><%=comment%></p>
+                        <%}%>
+                    </div>
+                        <% } %>
+                    </div>
                     
+
                 </div>
                 <p class="card-text"><%=movie.description%></p>
             </div>
 
         </div>
     </div>
-<% } %> 
+    <% } %>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="/homepage/moviesComment" method="POST" class="row">
-                <div class="col-10">
-                    <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
-                    <input type="text" class="form-control " placeholder="Comment" name="comment" id="validationCustomUsername" />
-                </div>
-                <div class="col-2">
-                    <input class="btn btn-info" type="submit" value="Send">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+<script>
+    $('body').on('click', "#show-comment-form", function () {
+        let el = $(this).parent()
+        el.find('#comment-form').toggleClass('opacity-0')
+    })
+</script>

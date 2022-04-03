@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 
 router.get('/favourites', errorsCatch(async (req, res) => {
     const movies = await Movies.find({ user: req.user.id })
+    // console.log(movies )
     res.render('favourites', { movies })
 }))
 

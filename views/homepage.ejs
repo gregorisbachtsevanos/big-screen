@@ -20,30 +20,26 @@
 
         for (movie of data.results) {
             output +=
-                /*html*/
-                `<div class="col w-25">
-                        <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
-                            <div style="height:20rem">
-                                <img src="https://image.tmdb.org/t/p/original/${movie.poster_path}" class="card-img-top h-100" alt="...">
-                            </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${movie.title}</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="card-text">${movie.release_date}</p>
-                                <form action="/homepage/moviesLike" method="POST">
-                                    <input type="hidden" id="hiddenInput" name="movieId" value="${movie.id}" />
-                                    <input type="submit"  class="text-decoration-none h2 bg-transparent border-0 link-danger" value="&#9825;">
-                                </form>
-                                
-                            </div>
-                                <!--<i class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like"><span>&#9825;<span></i>-->
-
-                            </div>
-                            <p class="card-text">${movie.overview}</p>
+            /*html*/
+            `<div class="col w-25">
+                <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
+                    <div style="height:20rem">
+                        <img src="https://image.tmdb.org/t/p/original/${movie.poster_path}" class="card-img-top h-100" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.title}</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="card-text">${movie.release_date}</p>
+                            <form action="/homepage/moviesLike" method="POST">
+                                <input type="hidden" id="hiddenInput" name="movieId" value="${movie.id}" />
+                                <input type="submit"  class="text-decoration-none h2 bg-transparent border-0 link-danger" value="&#9825;">
+                            </form>
                         </div>
-                        
-                        </div>
-                    </div>`
+                            <!--<i class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like"><span>&#9825;<span></i>-->
+                        <p class="card-text">${movie.overview}</p>
+                    </div>
+                </div>
+            </div>`
         }
         document.querySelector('.render-movies').innerHTML = output
     }

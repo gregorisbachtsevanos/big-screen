@@ -17,10 +17,9 @@ const movieSchema = new Schema({
     image: String,
     description: String,
     release_info: String,
-    user:{
-        type: Schema.Types.ObjectId,
-        ref: User
-    }
+    comment: [{
+        type: String
+    }]
 })
 
 const Movies = mongoose.model("Movies", movieSchema)
@@ -31,9 +30,9 @@ const makeMovie = async () => {
         image: "Movie Image",
         description: "Movie Description",
         release_info: "Movie release info",
-        
+
     })
-   await movie.save()
+    await movie.save()
 }
 
 // makeMovie()
@@ -42,7 +41,5 @@ const makeMovie = async () => {
 //     }).catch((err) => {
 //         console.log(err)   
 //     });
-
-// module.exports = Movies
 
 module.exports = Movies
