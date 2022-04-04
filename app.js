@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -15,7 +19,7 @@ const error = require('./utils/error')
 const URI = 'mongodb+srv://GregosisB:6re6b123@cluster0.mdmjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 const sessionConfig = {
-    secret: "secretcodeconfig",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {

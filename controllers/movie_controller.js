@@ -6,6 +6,7 @@ module.exports.likes = async (req, res) => {
 		movieId
 	} = req.body
 	const user = await User.findById(req.user.id)
+	
 	axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=46017593ecb210526b182311c582626b', (req, res))
 		.then(res => {
 			return res.data.results
