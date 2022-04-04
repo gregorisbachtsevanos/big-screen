@@ -44,6 +44,9 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
 app.use(session(sessionConfig))
 app.use(flash())
 

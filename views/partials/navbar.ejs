@@ -9,30 +9,27 @@
 			<li class="nav-item">
 				<a class="nav-link active" aria-current="page" href="/">Home</a>
 			</li>
-
 			<select class="nav-item dropdown bg-dark text-white text-opacity-50 border-0" id="categories"
 				aria-labelledby="navbarDropdownMenuLink">
-				<option value="now_playing" class="dropdown-item text-white text-opacity-75" disabled selected>
-					Categories</option>
+				<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75" selected>Top
+					Rated</option>
 				<option id="now_playing" value="now_playing" class="dropdown-item text-white text-opacity-75">Now
 					Playing</option>
-				<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75">Top Rated
-				</option>
 			</select>
 			<% if (!user) { %>
-				<li class="nav-item">
-					<a class="nav-link" href="/login">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/register">Create an Account</a>
-				</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/login">Login</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/register">Create an Account</a>
+			</li>
 			<% } else {%>
-				<li class="nav-item">
-					<a class="nav-link" href="/favourites">Favourites</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/logout">Logout</a>
-				</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/favourites">Favourites</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/logout">Logout</a>
+			</li>
 			<%  }%>
 			</select>
 		</ul>

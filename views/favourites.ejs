@@ -1,7 +1,10 @@
 <%- layout('layout/template.ejs') %>
 
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto">
-    <% for (movie of movies) { %>
+    <% if(!movies.length){ %> 
+        <p class="container text-center text-white">Your list is empty.</p>
+    <% } %> 
+    <% for (movie of movies.reverse()) { %>
     <div class="col" style="width: 33%;">
         <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
             <div style="height:20rem">
@@ -16,19 +19,21 @@
                             <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
                             <input type="submit" class="text-decoration-none h2 bg-transparent border-0 link-danger"
                                 value="&hearts;">
-                        </form>
+                        </form> 
+                        <!-- <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like" data-id="<%=//movie.id%>">&hearts;</button> -->
                         <% if(user.type == 'typeA'){ %>
-                        <button class="bg-transparent border-0 h5" id="show-comment-form">&#128172;</button>
+                        <button style="z-index:10;transition:.7s" class="bg-transparent border-0 h5" id="show-comment-form">&#128172;</button>
                         <div id="comment-form" style="transition:.7s; top:60%"
                         class="position-absolute end-0 opacity-0 container bg-dark p-2">
+                        <p class="container text-end" id="close">&#10006;</p>
                         <form action="/homepage/moviesComment" method="POST">
                             <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
                             <input class="form-control" type="text" name="comment" placeholder="comment" />
                             <input type="submit" class="btn btn-sm my-2 btn-success text-decoration-none h5 border-0"
                                 value="Send">
                         </form>
-                        <% for (comment of movie.comment) { %>
-                            <p><%=comment%></p>
+                        <% for (comment of movie.comment.reverse()) { %>
+                            <p class="border-bottom border-1 border-secondary p-1"><%=comment%></p>
                         <%}%>
                     </div>
                         <% } %>
@@ -36,7 +41,7 @@
                     
 
                 </div>
-                <p class="card-text"><%=movie.description%></p>
+                <p class="card-text" id="description"><%=movie.description%></p>
             </div>
 
         </div>
@@ -46,7 +51,14 @@
 
 <script>
     $('body').on('click', "#show-comment-form", function () {
-        let el = $(this).parent()
-        el.find('#comment-form').toggleClass('opacity-0')
+        let form = $(this).parent()
+        form.find('#comment-form, #show-comment-form').toggleClass('opacity-0')
+        let div = form.parent()
+        div.parent().find('#description').css({'transition':'.7s', }).toggleClass('opacity-0')
     })
+    $('body').on('click', "#close", function () {
+        $(this).parent().find('#comment-form').add('opacity-0')
+    })
+
+   
 </script>

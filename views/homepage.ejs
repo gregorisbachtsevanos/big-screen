@@ -1,6 +1,6 @@
 <%- layout('layout/template.ejs') %>
-
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto"></div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     // let category = 'top_rated'
     const loadMovies = (category = 'top_rated') => {
@@ -30,10 +30,12 @@
                         <h5 class="card-title">${movie.title}</h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-text">${movie.release_date}</p>
-                            <form action="/homepage/moviesLike" method="POST">
+                            <!--<form action="/homepage/moviesLike" method="POST">
                                 <input type="hidden" id="hiddenInput" name="movieId" value="${movie.id}" />
                                 <input type="submit"  class="text-decoration-none h2 bg-transparent border-0 link-danger" value="&#9825;">
-                            </form>
+                            </form>-->
+                        <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like" data-id="${movie.id}">&hearts;</button>
+
                         </div>
                             <!--<i class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like"><span>&#9825;<span></i>-->
                         <p class="card-text">${movie.overview}</p>
@@ -48,7 +50,12 @@
         loadMovies(e.target.value)
     })
 
-    // $("body").on("click", "#like", function () {
-    //     alert('like')
-    // });
+    
+    $('body').on("click", '#like', function(){
+        let movieId = $(this).data('id')
+        $(this).css({'transform': 'scale(1.2)', 'transaction': '.7s'})
+        setTimeout(() => {$(this).css('transform', 'scale(1)')}, 100)
+        
+        axios.post('/homepage/moviesLike', {movieId:movieId})
+    })
 </script>

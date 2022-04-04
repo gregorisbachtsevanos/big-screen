@@ -26,7 +26,11 @@ const userSchema = new Schema({
         type: String,
         required: true, 
         emit: ['typeA', 'typeB']
-    }
+    },
+    movies: [{
+        type:Schema.Types.ObjectId,
+        ref: "movies"
+    }]
 })
 
 userSchema.plugin(passportLocalMongoose)
