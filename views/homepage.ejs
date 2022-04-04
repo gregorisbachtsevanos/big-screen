@@ -2,7 +2,6 @@
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto"></div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    // let category = 'top_rated'
     const loadMovies = (category = 'top_rated') => {
         fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=46017593ecb210526b182311c582626b`, {
                 method: 'POST',
@@ -30,14 +29,10 @@
                         <h5 class="card-title">${movie.title}</h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-text">${movie.release_date}</p>
-                            <!--<form action="/homepage/moviesLike" method="POST">
-                                <input type="hidden" id="hiddenInput" name="movieId" value="${movie.id}" />
-                                <input type="submit"  class="text-decoration-none h2 bg-transparent border-0 link-danger" value="&#9825;">
-                            </form>-->
-                        <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like" data-id="${movie.id}">&hearts;</button>
-
+                            <% if(user){ %>
+                                <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like" data-id="${movie.id}">&hearts;</button>
+                            <% }%>
                         </div>
-                            <!--<i class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like"><span>&#9825;<span></i>-->
                         <p class="card-text">${movie.overview}</p>
                     </div>
                 </div>
