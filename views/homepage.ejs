@@ -1,4 +1,9 @@
 <%- layout('layout/template.ejs') %>
+<div class="d-flex justify-content-center position-fixed w-100" style="z-index: 500;">
+    <div class="alert alert-secondary d-none w-25 " role="alert">
+        Movie added to your list - check it out!
+    </div>
+</div>
 <div class="render-movies row row-cols-1 row-cols-md-3 g-4 w-75 py-5 m-auto"></div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -20,7 +25,7 @@
         for (movie of data.results) {
             output +=
             /*html*/
-            `<div class="col w-25">
+            `<div class="col">
                 <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
                     <div style="height:20rem">
                         <img src="https://image.tmdb.org/t/p/original/${movie.poster_path}" class="card-img-top h-100" alt="...">
@@ -30,7 +35,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-text">${movie.release_date}</p>
                             <% if(user){ %>
-                                <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 link-danger" id="like" data-id="${movie.id}">&hearts;</button>
+                                <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 fw-lighter link-light opacity-75" id="like" data-id="${movie.id}">&#9825;</button>
                             <% }%>
                         </div>
                         <p class="card-text">${movie.overview}</p>
@@ -52,5 +57,9 @@
         setTimeout(() => {$(this).css('transform', 'scale(1)')}, 100)
         
         axios.post('/homepage/moviesLike', {movieId:movieId})
+        // alert("Movie added to your list!")
+        $('.alert').removeClass('d-none')
+        setTimeout(() => {$('.alert').addClass('d-none')}, 900)
+
     })
 </script>

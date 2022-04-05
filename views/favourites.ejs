@@ -5,7 +5,7 @@
     <p class="container text-center text-white">Your list is empty.</p>
     <% } %>
     <% for (movie of movies.reverse()) { %>
-    <div class="col" style="width: 33%;">
+    <div class="col">
         <div class="card border-bottom bg-dark text-white text-opacity-75 h-100 w-100">
             <div style="height:20rem">
                 <img src="https://image.tmdb.org/t/p/original/<%=movie.image%>" class="card-img-top h-100" alt="...">
@@ -15,20 +15,16 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="card-text"><%=movie.release_info%></p>
                     <div class="d-flex">
-                        <form action="/homepage/moviesLike" method="POST">
-                            <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
-                            <input type="submit" class="text-decoration-none h2 bg-transparent border-0 link-danger"
-                                value="&hearts;">
-                        </form>
+                        <button style="z-index:10" class="text-decoration-none h2 bg-transparent border-0 fw-lighter link-danger opacity-75" id="like" data-id="${movie.id}">&#9825;</button>
                         <% if(user.type == 'typeA'){ %>
                         <button style="z-index:600;transition:.7s" class="bg-transparent border-0 h5"
                             id="show-comment-form">&#128172;</button>
                         <div id="comment-form" style="transition:.7s;top:60%;z-index:500" 
                             class="position-absolute end-0 opacity-0 container bg-dark p-2">
                             <p class="container text-end" id="close">&#10006;</p>
-                            <form action="/homepage/moviesComment" method="POST">
+                            <form action="/homepage/moviesComment" method="POST" autocomplete="off">
                                 <input type="hidden" id="hiddenInput" name="movieId" value="<%=movie.id%>" />
-                                <input class="form-control" type="text" name="comment" placeholder="comment" />
+                                <input class="form-control" type="text" name="comment" placeholder="comment" autocomplete="false"/>
                                 <input type="submit"
                                     class="btn btn-sm my-2 btn-success text-decoration-none h5 border-0" value="Send">
                             </form>

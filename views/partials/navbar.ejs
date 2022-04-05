@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark ">
+<nav class="navbar navbar-expand navbar-dark bg-transparent ">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">LOGO</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -9,11 +9,11 @@
 			<li class="nav-item">
 				<a class="nav-link active" aria-current="page" href="/">Home</a>
 			</li>
-			<select class="nav-item dropdown bg-dark text-white text-opacity-50 border-0" id="categories"
+			<select class="nav-item dropdown bg-transparent text-white text-opacity-50 border-0" id="categories"
 				aria-labelledby="navbarDropdownMenuLink">
-				<option id="top_rated" value="top_rated" class="dropdown-item text-white text-opacity-75" selected>Top
+				<option id="top_rated" value="top_rated" class="dropdown-item text-dark text-opacity-75" selected>Top
 					Rated</option>
-				<option id="now_playing" value="now_playing" class="dropdown-item text-white text-opacity-75">Now
+				<option id="now_playing" value="now_playing" class="dropdown-item text-dark text-opacity-75">Now
 					Playing</option>
 			</select>
 			<% if (!user) { %>

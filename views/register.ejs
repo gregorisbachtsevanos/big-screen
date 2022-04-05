@@ -1,8 +1,8 @@
 <%- layout('layout/template.ejs') %>
 <div class="container border rounded p-5 my-5 w-50">
-	<form method="POST" action="/register" class="row g-3 text-white needs-validation" novalidate>
+	<form method="POST" action="/register" class="row g-3 text-white needs-validation" novalidate autocomplete="off">
 		<div class="col-md-4">
-			<input type="text" class="form-control" placeholder="Fullname" id="validationCustom01" name="fullname" required>
+			<input type="text" class="form-control" placeholder="Fullname" id="validationCustom01" name="fullname" required autocomplete="false">
 			<div class="valid-feedback">
 				Looks good!
 			</div>
@@ -13,7 +13,7 @@
 		<div class="col-md-4">
 			<div class="input-group has-validation">
 				<input type="text" class="form-control" placeholder="Username" name="username" id="validationCustomUsername"
-					aria-describedby="inputGroupPrepend" required>
+					aria-describedby="inputGroupPrepend" required autocomplete="false">
 					<div class="valid-feedback">
 						Looks good!
 					</div>
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<select class="form-select" id="validationCustom04" name="type" required>
+			<select class="form-select" id="validationCustom04" name="type" required autocomplete="false">
 				<option selected disabled value="">Choose...</option>
 				<option value="typeA">Type A</option>
 				<option value="typeB">Type B</option>
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<input type="email" class="form-control" placeholder="Email" id="validationCustom03" name="email" required>
+			<input type="email" class="form-control" placeholder="Email" id="validationCustom03" name="email" required autocomplete="false">
 			<div class="valid-feedback">
 				Looks good!
 			</div>
@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="col-md-6">
-			<input type="password" class="form-control" placeholder="Password" id="validationCustom05" minlength=8 name="password" required>
+			<input type="password" class="form-control" placeholder="Password" id="validationCustom05" minlength=8 name="password" required autocomplete="false">
 			<div class="valid-feedback">
 				Looks good!
 			</div>
