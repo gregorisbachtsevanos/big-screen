@@ -16,7 +16,7 @@ const moviesRouter = require('./routers/movies/movies')
 const User = require('./model/user_model');
 const error = require('./utils/error')
 
-const URI = 'mongodb+srv://GregosisB:6re6b123@cluster0.mdmjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const URI = 'mongodb+srv://GregosisB:6re6b12e@cluster0.mdmjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 const sessionConfig = {
     secret: process.env.SECRET,
